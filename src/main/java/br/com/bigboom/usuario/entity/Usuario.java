@@ -31,9 +31,6 @@ public class Usuario implements Serializable {
         @Column(name = "telefone")
         private String telefone;
 
-		// public Long getId() {
-		// 	// TODO Auto-generated method stub
-		// 	return null;
-		// }
+	
 
 }
