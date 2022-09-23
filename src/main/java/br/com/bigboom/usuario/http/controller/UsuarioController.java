@@ -59,6 +59,16 @@ public class UsuarioController {
                     return Void.TYPE;
                 }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário nao encontrado."));
     }
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void atualizarUsuario1(@PathVariable("id") Long id, @RequestBody Usuario usuario){
+        usuarioService.buscarPorId(id)
+                .map(usuarioBase -> {
+                    modelMapper.map(usuario, usuarioBase);
+                    usuarioService.salvar(usuarioBase);
+                    return Void.TYPE;
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário nao encontrado."));
+    }
 
 
 
