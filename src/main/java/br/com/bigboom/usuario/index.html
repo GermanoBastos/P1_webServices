@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
     <title>Cadastro de Usuários</title>
 </head>
-<body>
-    
-<H1>Olá</H1>
 
+<body>
+    <div class="container my-4 col-4">
+        <form action="" class="form-control row my-5 g-4 ">
+
+            <div class="col-md-12">
+                <label for="validationDefault01" class="form-label">ID:</label>
+                <input type="number" class="form-control id" placeholder="Insira o ID" name="id">
+            </div>
+            <div class="col-md-12">
+                <label for="validationDefault01" class="form-label">Nome:</label>
+                <input type="text" class="form-control nome" placeholder="Insira o nome" name="nome" required>
+            </div>
+            <div class="col-md-12">
+                <label for="validationDefault02" class="form-label ">CPF:</label>
+                <input type="text" class="form-control cpf" placeholder="Insira o CPF" name="cpf" required>
+            </div>
+            <div class="col-md-12">
+                <label for="validationDefault02" class="form-label ">Telefone:</label>
+                <input type="text" class="form-control telefone" placeholder="Insira o telefone" name="telefone" required>
+            </div>
+            <div class="col-md-12">
+                <label for="validationDefault02" class="form-label ">E-mail:</label>
+                <input type="text" class="form-control email" placeholder="Insira o e-mail" name="email" required>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-2" type="submit">Limpar</button>
+                <button class="btn btn-primary" type="submit">Salvar</button>
+              </div>
+        </form>
+    </div>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
 </body>
 </html>
