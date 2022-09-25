@@ -11,9 +11,10 @@
     <title>Cadastro de Usuários</title>
 </head>
 
-<body>
-    <div class="container my-4 col-4">
-        <form action="" class="form-control row my-5 g-4 ">
+<body class="">
+    <h2 class="container col-2 my-5">Cadastro de Usuários</h2>
+    <div class=" container   my-5 col-4">
+        <form action="" class="form-control row my-2 g-4 ">
 
             <div class="col-md-12">
                 <label for="validationDefault01" class="form-label">ID:</label>
@@ -21,29 +22,52 @@
             </div>
             <div class="col-md-12">
                 <label for="validationDefault01" class="form-label">Nome:</label>
-                <input type="text" class="form-control nome" placeholder="Insira o nome" name="nome" required>
+                <input type="text" class="form-control nome" placeholder="Insira o nome" name="nome">
             </div>
             <div class="col-md-12">
                 <label for="validationDefault02" class="form-label ">CPF:</label>
-                <input type="text" class="form-control cpf" placeholder="Insira o CPF" name="cpf" required>
+                <input type="text" class="form-control cpf" placeholder="Insira o CPF" name="cpf">
             </div>
             <div class="col-md-12">
                 <label for="validationDefault02" class="form-label ">Telefone:</label>
-                <input type="text" class="form-control telefone" placeholder="Insira o telefone" name="telefone" required>
+                <input type="text" class="form-control telefone" placeholder="Insira o telefone" name="telefone">
             </div>
             <div class="col-md-12">
                 <label for="validationDefault02" class="form-label ">E-mail:</label>
-                <input type="text" class="form-control email" placeholder="Insira o e-mail" name="email" required>
+                <input type="text" class="form-control email" placeholder="Insira o e-mail" name="email">
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-primary me-md-2" type="submit">Limpar</button>
-                <button class="btn btn-primary" type="submit">Salvar</button>
-              </div>
+                <button class="btn btn-primary ">GET</button>
+                <button class="btn btn-primary btn-post">POST</button>
+                <button class="btn btn-primary btn-put">PUT</button>
+                <button class="btn btn-primary">PATCH</button>
+                <button class="btn btn-primary  btn-delete">DELETE</button>
+            </div>
         </form>
+
     </div>
+    <div class=" container my-5 col-12">
+
+        <table class="table table-borderless tabelaUser">
+            <thead>
+                <tr>
+                    <th scope="col">ID
+
+                    </th>
+
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">E-mail</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
     <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
