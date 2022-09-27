@@ -7,10 +7,11 @@ const Iid = document.querySelector(".id");
 const btnPost = document.querySelector(".btn-post");
 const btnDelete = document.querySelector(".btn-delete");
 const btnPut = document.querySelector(".btn-put");
+const url = `https://p1webservices.herokuapp.com/usuario`;
 
 //CADASTRAR USUARIOS ============================================================
 function cadastrar() {
-  fetch(`https://p1webservices.herokuapp.com/usuario`, {
+  fetch(url, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -25,19 +26,21 @@ function cadastrar() {
     }),
   })
     .then(function (res) {
-      console.log(res);
+      return res.json();
     })
     .catch(function (res) {
       console.log(res);
     });
-  }
+}
+
+// ATUALIZAR USUARIOS ===============================================================
 function atualizar() {
   fetch(`https://p1webservices.herokuapp.com/usuario/${Iid.value}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    method: "PATCH",
+    method: "PUT",
     body: JSON.stringify({
       id: Iid.value,
       nome: Inome.value,
@@ -52,32 +55,51 @@ function atualizar() {
     .catch(function (res) {
       console.log(res);
     });
-  }
+}
 
-
-// DLEETAR USUARIOS ===============================================================
-  function deletar() {
-    fetch(`https://p1webservices.herokuapp.com/usuario/${Iid.value}`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "DELETE",
-      // body: JSON.stringify({
-      //   id: Iid.value,
-      //   nome: Inome.value,
-      //   cpf: Icpf.value,
-      //   telefone: Itelefone.value,
-      //   email: Iemail.value,
-      // }),
+// DELETAR USUARIOS ===============================================================
+function deletar() {
+  fetch(`https://p1webservices.herokuapp.com/usuario/${Iid.value}`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "DELETE",
+  })
+    .then(function (res) {
+      console.log(res);
     })
-      .then(function (res) {
-        console.log(res);
-      })
-      .catch(function (res) {
-        console.log(res);
-      });
-    }
+    .catch(function (res) {
+      console.log(res);
+    });
+}
+
+//COLETAR DADOS DA URL PARA EXIBIR NA TABELA
+fetch(url)
+  .then((response) => {
+    response.json().then((url) => {
+      setTableData(url);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+const setTableData = (url) => {
+  let list = url.map(element => {
+    let tr = document.querySelector("#tr-register");
+    return tr.innerHTML = `
+        <td>${element.id}</td>
+        <td>${element.nome}</td>
+        <td>${element.cpf}</td>
+        <td>${element.telefone}</td>
+        <td>${element.email}</td>`;
+  })
+
+
+
+};
+
 
 // FUNÇÃO PARA LIMPAR CAMPOS APÓS CLIQUE DE UM BOTÃO
 function limpar() {
@@ -88,21 +110,24 @@ function limpar() {
     (Iemail.value = "");
 }
 
-//BOTÃO POST OK ===============================================
-btnPost.addEventListener("click", function(event){
+//BOTÃO POST OK =======================================================
+btnPost.addEventListener("click", function (event) {
   event.preventDefault();
   cadastrar();
   limpar();
+  self.location.reload();
 });
 //BOTÃO DELETE POR ID OK ===============================================
-btnDelete.addEventListener("click", function(event){
+btnDelete.addEventListener("click", function (event) {
   event.preventDefault();
   deletar();
   limpar();
+
 });
-//BOTÃO PUT POR ID OK ===============================================
-btnPut.addEventListener("click", function(event){
+//BOTÃO PUT POR ID OK ==================================================
+btnPut.addEventListener("click", function (event) {
   event.preventDefault();
   atualizar();
   limpar();
+
 });
