@@ -1,16 +1,18 @@
 const formulario = document.querySelector("form");
 const Inome = document.querySelector(".nome");
 const Icpf = document.querySelector(".cpf");
-const Itelefone = document.querySelector(".email");
-const Iemail = document.querySelector(".telefone");
+const Itelefone = document.querySelector(".telefone");
+const Iemail = document.querySelector(".email");
 const Iid = document.querySelector(".id");
 const btnPost = document.querySelector(".btn-post");
 const btnDelete = document.querySelector(".btn-delete");
 const btnPut = document.querySelector(".btn-put");
 
+// const url = `https://p1webservices.herokuapp.com/usuario/`;
+
 //CADASTRAR USUARIOS ============================================================
 function cadastrar() {
-  fetch(`https://p1webservices.herokuapp.com/usuario`, {
+  fetch(`https://p1webservices.herokuapp.com/usuario/`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -25,19 +27,21 @@ function cadastrar() {
     }),
   })
     .then(function (res) {
-      console.log(res);
+      return res.json();
     })
     .catch(function (res) {
       console.log(res);
     });
-  }
+}
+
+// ATUALIZAR USUARIOS ===============================================================
 function atualizar() {
   fetch(`https://p1webservices.herokuapp.com/usuario/${Iid.value}`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    method: "PATCH",
+    method: "PUT",
     body: JSON.stringify({
       id: Iid.value,
       nome: Inome.value,
@@ -52,56 +56,92 @@ function atualizar() {
     .catch(function (res) {
       console.log(res);
     });
-  }
+}
 
-
-// DLEETAR USUARIOS ===============================================================
-  function deletar() {
-    fetch(`https://p1webservices.herokuapp.com/usuario/${Iid.value}`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "DELETE",
-      // body: JSON.stringify({
-      //   id: Iid.value,
-      //   nome: Inome.value,
-      //   cpf: Icpf.value,
-      //   telefone: Itelefone.value,
-      //   email: Iemail.value,
-      // }),
+// DELETAR USUARIOS ===============================================================
+function deletar() {
+  fetch(`https://p1webservices.herokuapp.com/usuario/${Iid.value}`, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "DELETE",
+  })
+    .then(function (res) {
+      console.log(res);
     })
-      .then(function (res) {
-        console.log(res);
-      })
-      .catch(function (res) {
-        console.log(res);
-      });
-    }
+    .catch(function (res) {
+      console.log(res);
+    });
+}
 
-// FUNÇÃO PARA LIMPAR CAMPOS APÓS CLIQUE DE UM BOTÃO
+//COLETAR DADOS DA URL PARA EXIBIR NA TABELA
+fetch(`https://p1webservices.herokuapp.com/usuario/`)
+  .then((response) => {
+    response.json().then((url) => {
+      setTableData(url);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+const setTableData = (url) => {
+  let tabela = document.getElementById("tabela");
+  url.map((element) => {
+    let linha = criaLinha(element);
+    tabela.appendChild(linha);
+  });
+};
+
+//FUNÇÃO PARA CRIAR LINHAS NA TABELA HTML =================================
+function criaLinha(url) {
+  //linhas que serão criadas =========
+  linha = document.createElement("tr");
+  id = document.createElement("td");
+  nome = document.createElement("td");
+  cpf = document.createElement("td");
+  telefone = document.createElement("td");
+  email = document.createElement("td")
+  //linhas
+
+  id.innerHTML = url.id;
+  nome.innerHTML = url.nome;
+  cpf.innerHTML = url.cpf;
+  telefone.innerHTML = url.telefone;
+  email.innerHTML = url.email;
+
+  linha.appendChild(id);
+  linha.appendChild(nome);
+  linha.appendChild(cpf);
+  linha.appendChild(telefone);
+  linha.appendChild(email)
+  return linha;
+}
+
+// FUNÇÃO PARA LIMPAR CAMPOS APÓS CLIQUE DE UM BOTÃO ======================
 function limpar() {
   (Iid.value = ""),
     (Inome.value = ""),
     (Icpf.value = ""),
     (Itelefone.value = ""),
-    (Iemail.value = "");
+    (Iemail.value = "")
 }
 
-//BOTÃO POST OK ===============================================
-btnPost.addEventListener("click", function(event){
+//BOTÃO POST OK =======================================================
+btnPost.addEventListener("click", function (event) {
   event.preventDefault();
   cadastrar();
   limpar();
 });
 //BOTÃO DELETE POR ID OK ===============================================
-btnDelete.addEventListener("click", function(event){
+btnDelete.addEventListener("click", function (event) {
   event.preventDefault();
   deletar();
   limpar();
 });
-//BOTÃO PUT POR ID OK ===============================================
-btnPut.addEventListener("click", function(event){
+//BOTÃO PUT POR ID OK ==================================================
+btnPut.addEventListener("click", function (event) {
   event.preventDefault();
   atualizar();
   limpar();
