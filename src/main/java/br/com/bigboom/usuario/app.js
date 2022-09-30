@@ -8,7 +8,6 @@ const btnPost = document.querySelector(".btn-post");
 const btnDelete = document.querySelector(".btn-delete");
 const btnPut = document.querySelector(".btn-put");
 
-
 //CADASTRAR USUARIOS ============================================================
 function cadastrar() {
   fetch(`https://p1webservices.herokuapp.com/usuario/`, {
@@ -51,6 +50,7 @@ function atualizar() {
   })
     .then(function (res) {
       console.log(res);
+      location.reload();
     })
     .catch(function (res) {
       console.log(res);
@@ -68,6 +68,7 @@ function deletar() {
   })
     .then(function (res) {
       console.log(res);
+      location.reload();
     })
     .catch(function (res) {
       console.log(res);
@@ -95,13 +96,13 @@ const setTableData = (url) => {
 
 //FUNÇÃO PARA CRIAR LINHAS NA TABELA HTML =================================
 function criaLinha(url) {
-  //linhas que serão criadas =========
   linha = document.createElement("tr");
+
   id = document.createElement("td");
   nome = document.createElement("td");
   cpf = document.createElement("td");
   telefone = document.createElement("td");
-  email = document.createElement("td")
+  email = document.createElement("td");
   //linhas
 
   id.innerHTML = url.id;
@@ -114,7 +115,7 @@ function criaLinha(url) {
   linha.appendChild(nome);
   linha.appendChild(cpf);
   linha.appendChild(telefone);
-  linha.appendChild(email)
+  linha.appendChild(email);
   return linha;
 }
 
@@ -124,7 +125,7 @@ function limpar() {
     (Inome.value = ""),
     (Icpf.value = ""),
     (Itelefone.value = ""),
-    (Iemail.value = "")
+    (Iemail.value = "");
 }
 
 //BOTÃO POST OK =======================================================
@@ -132,6 +133,7 @@ btnPost.addEventListener("click", function (event) {
   event.preventDefault();
   cadastrar();
   limpar();
+  location.reload();
 });
 //BOTÃO DELETE POR ID OK ===============================================
 btnDelete.addEventListener("click", function (event) {
